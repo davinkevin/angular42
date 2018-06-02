@@ -25,8 +25,82 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+
+				<section data-background="images/cover.jpg">
+						<div id="cover">
+							<h2>Angular 42</h2>
+							<h5>On en est où ?</h5>
+						</div>
+				</section>
+
+				<section id="introduction">
+					<section data-background="images/introduction/announcement.png">
+						&nbsp;
+					</section>
+					<section id="angular_announcement">
+						<img src="images/introduction/angular_logo.png" alt="angular logo">
+					</section>
+					<section>
+						And almost two years later...
+					</section>
+					<section data-background="images/introduction/angular-2-release-balloons.jpg">
+						<h4>Angular2 Release !</h4>
+						<h5 class="fragment">finally...</h5>
+					</section>
+				</section>
+				<section id="during_last_two_years">
+					<section id="angular_loose_2">
+						<div>
+							<img src="images/introduction/angular_logo.png" alt="angular logo">
+							Angular
+							<div class="fragment fade-out" data-fragment-index="1">2</div>
+						</div>
+					</section>
+					<section id="its_just_angular">
+						<img src="images/introduction/twitter_logo.png" class="as_character"> <a href="https://twitter.com/hashtag/itsjustangular">#ItsJustAngular</a>
+					</section>
+					<section id="angular_v4">
+						<p>March 2017</p>
+						<img src="images/introduction/angular_logo.png" class="as_character"> Release of v4
+					</section>
+					<section id="angular_v5">
+						<p>November 2017</p>
+						<img src="images/introduction/angular_logo.png" class="as_character"> Release of v5
+					</section>
+					<section id="angular_v6">
+						<p>May 2018</p>
+						<img src="images/introduction/angular_logo.png" class="as_character"> Release of v6
+					</section>
+					<section id="moving_version" data-background="/images/introduction/rolling_update_angular.gif">
+						&nbsp;
+					</section>
+				</section>
+				<section id="who_am_i">
+					<section id="me" data-background-color="white">
+						<img src="images/introduction/github_davinkevin.png" alt="github davinkevin">
+					</section>
+					<section id="who_i_working_for" data-background-color="white">
+						<img src="images/introduction/logo-stacklab.png" alt="stack labs">
+					</section>
+					<section id="where_i_m_working">
+						<h2>
+							<span class="fragment">🛰</span>
+							<span class="fragment"> + 🛩</span>
+							<span class="fragment">
+								 + <img class="logo_toulouse" src="images/introduction/toulouse.png" alt="toulouse">
+							</span>
+							<span class="fragment">
+								= 🤔
+							</span>
+						</h2>
+					</section>
+					<section id="team" data-background="images/introduction/team.jpg">
+						&nbsp;
+					</section>
+					<section id="projects" data-background="images/introduction/projects.jpg">
+						&nbsp;
+					</section>
+				</section>
 			</div>
 		</div>
 
@@ -38,6 +112,7 @@
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
+                history: true,
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
