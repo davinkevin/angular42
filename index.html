@@ -101,6 +101,62 @@
 						&nbsp;
 					</section>
 				</section>
+
+				<section id="in_the_framework">
+					<h3> 🎉 Angular 6</h3>
+				</section>
+
+				<section id="tree_shakeable_provider">
+
+					<section>
+						<h3><code>@Injectable() provider</code></h3>
+					</section>
+
+					<section>
+						<p>Before Angular 6, creating a service look like this</p>
+						<pre><code class="hljs typescript">// hero.service.ts
+@Injectable()
+export class HeroService {
+  constructor(private http: HttpClient){}
+}						</code></pre>
+						<pre class="fragment"><code class="hljs typescript">// hero.module.ts
+@NgModule({
+ providers: [HeroService],
+})
+export class HeroModule() {}</code></pre>
+					</section>
+					<section>
+						<p>In Angular 6</p>
+						<pre><code class="hljs typescript">// hero.service.ts
+@Injectable({
+ provideIn: HeroService
+})
+export class HeroService {
+  constructor(private http: HttpClient){}
+}						</code></pre>
+						<pre class="fragment"><code class="hljs typescript">// hero.module.ts
+@NgModule({})
+export class HeroModule() {}</code></pre>
+					</section>
+					<section>
+						<p>Same thing for <code>InjectionToken</code></p>
+						<pre><code class="hljs typescript" data-trim data-noescape>
+const TOKEN = new InjectionToken&lt;Config&gt;('Config'<span class="fragment">, {
+  providedIn: HeroModule,
+  factory: () => { value: 'foo' },
+}</span>);
+						</code></pre>
+					</section>
+
+					<section>
+						<h5>Benefits</h5>
+						<ul>
+							<li>Smaller bundle thanks to 🌳-shaking</li>
+							<li>Reduce boilerplate into <code>@NgModule</code></li>
+							<li>Simplify testing</li>
+						</ul>
+					</section>
+				</section>
 			</div>
 		</div>
 
