@@ -129,7 +129,7 @@ export class HeroModule() {}</code></pre>
 						<p>In Angular 6</p>
 						<pre><code class="hljs typescript">// hero.service.ts
 @Injectable({
- provideIn: HeroService
+ provideIn: HeroModule // or 'root'
 })
 export class HeroService {
   constructor(private http: HttpClient){}
@@ -146,6 +146,19 @@ const TOKEN = new InjectionToken&lt;Config&gt;('Config'<span class="fragment">, 
   factory: () => { value: 'foo' },
 }</span>);
 						</code></pre>
+					</section>
+
+					<section>
+						<h4>Comparison</h4>
+						<p>With 100 Services, <code>ng build --prod</code></p>
+						<pre class="fragment" data-fragment-index="1"><code>// With NgModule.providers
+chunk {3} main.js (main) 171 kB [initial] [rendered]</code></pre>
+						<pre class="fragment" data-fragment-index="1"><code>$ cat dist/test-old-provider/main.js | grep -o wonde | wc -l
+100</code></pre>
+						<pre class="fragment" data-fragment-index="2"><code>// With @Injectable.provideIn
+chunk {3} main.js (main) 158 kB [initial] [rendered]</code></pre>
+						<pre class="fragment" data-fragment-index="2"><code>cat dist/test-new-provider/main.js | grep -o wonde | wc -l
+0</code></pre>
 					</section>
 
 					<section>

@@ -5,8 +5,11 @@ out/
 .svn
 log/*.log
 tmp/**
-node_modules/
+node_modules
 .sass-cache
 css/reveal.min.css
 js/reveal.min.js
 *.pem
+/demo/provider/test-new-provider/yarn.lock
+/demo/provider/test-old-provider/yarn.lock
+dist
