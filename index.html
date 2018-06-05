@@ -153,11 +153,11 @@ const TOKEN = new InjectionToken&lt;Config&gt;('Config'<span class="fragment">, 
 						<p>With 100 Services, <code>ng build --prod</code></p>
 						<pre class="fragment" data-fragment-index="1"><code>// With NgModule.providers
 chunk {3} main.js (main) 171 kB [initial] [rendered]</code></pre>
-						<pre class="fragment" data-fragment-index="1"><code>$ cat dist/test-old-provider/main.js | grep -o wonde | wc -l
+						<pre class="fragment" data-fragment-index="1"><code>$ cat main.js | grep -o wonde | wc -l
 100</code></pre>
 						<pre class="fragment" data-fragment-index="2"><code>// With @Injectable.provideIn
 chunk {3} main.js (main) 158 kB [initial] [rendered]</code></pre>
-						<pre class="fragment" data-fragment-index="2"><code>cat dist/test-new-provider/main.js | grep -o wonde | wc -l
+						<pre class="fragment" data-fragment-index="2"><code>cat main.js | grep -o wonde | wc -l
 0</code></pre>
 					</section>
 
@@ -168,6 +168,57 @@ chunk {3} main.js (main) 158 kB [initial] [rendered]</code></pre>
 							<li>Reduce boilerplate into <code>@NgModule</code></li>
 							<li>Simplify testing</li>
 						</ul>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Ivy Renderer</h3>
+					</section>
+
+					<section>
+						<h3>With Render2</h3>
+						<pre><code>export function View_AppComponent_0() {
+  return viewDef(0, [
+      elementDef(0, 0, null, null, 2, "div", [], null, null, null, null, null),
+      elementDef(1, 0, null, null, 1, "p", [], null, null, null, null, null),
+      textDef(2, null, ["Hello ", ""])
+    ], null, function (check, view) {
+      var comp = view.component;
+      var value = comp.title;
+      check(view, 2, 0, value);
+    }
+  );
+}</code></pre>
+					</section>
+					<section>
+						<h3>With Ivy</h3>
+						<pre><code>export class AppComponent {
+  constructor() {
+    this.title = 'World';
+  }
+  updateTitle() {
+    this.title = 'Luxembourg !';
+  }
+}</code></pre>
+					</section>
+					<section>
+						<h3>And the template</h3>
+						<pre><code>AppComponent.ngComponentDef = defineComponent({
+  type: AppComponent,
+  selectors: [["app-root"]],
+  factory: function AppComponent_Factory() { return new AppComponent(); },
+  template: function AppComponent_Template(renderFlag, component) {
+    if (renderFlag & RenderFlags.Create) {
+      elementStart(0, "div");
+      elementStart(1, "p");
+      text(2);
+      elementEnd();
+      elementEnd();
+    } if (renderFlag & RenderFlags.Update) {
+      textBinding(2, interpolation1("Hello ", component.title, ""));
+    }
+  }
+});</code></pre>
 					</section>
 				</section>
 			</div>
