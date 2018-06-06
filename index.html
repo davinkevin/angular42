@@ -191,6 +191,29 @@ $ 0</code></pre>
 }</code></pre>
 					</section>
 					<section>
+						<h3>And the sub-layer structure of the <code>createViewNodes</code></h3>
+						<pre><code>function createViewNodes(view: ViewData) {
+  ...
+    switch (nodeDef.flags & NodeFlags.Types) {
+      case NodeFlags.TypeElement: element(node); break;
+      case NodeFlags.TypeText: text(node); break;
+      case NodeFlags.TypeClassProvider:
+      case NodeFlags.TypeFactoryProvider:
+      case NodeFlags.TypeUseExistingProvider:
+      case NodeFlags.TypeValueProvider: valueProvider(node); break;
+      case NodeFlags.TypePipe:  pipe(node); break;
+      case NodeFlags.TypeDirective:  directive(node); break;
+      case NodeFlags.TypePureArray:
+      case NodeFlags.TypePureObject:
+      case NodeFlags.TypePurePipe: purePipe(node); break;
+      case NodeFlags.TypeContentQuery:
+      case NodeFlags.TypeViewQuery: viewQuery(node); break;
+      case NodeFlags.TypeNgContent: ngContent(node); break;
+    }
+  ...
+}</code></pre>
+					</section>
+					<section>
 						<h3>With Ivy</h3>
 						<pre><code>export class AppComponent {
   constructor() {
