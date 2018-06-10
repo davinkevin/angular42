@@ -17,8 +17,5 @@
       "dom"
     ],
     "preserveConstEnums": true
-  },
-  "angularCompilerOptions": {
-    "enableIvy": false
   }
 }
