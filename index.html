@@ -108,12 +108,12 @@
 
 				<section id="tree_shakeable_provider">
 
-					<section>
+					<section data-background="/images/angular6/injector/injector.jpg">
 						<h3><code>@Injectable() provider</code></h3>
 					</section>
 
 					<section>
-						<p>Before Angular 6, creating a service look like this</p>
+						<p>Before Angular 6, creating a service looks like this</p>
 						<pre><code class="hljs typescript">// hero.service.ts
 @Injectable()
 export class HeroService {
@@ -166,7 +166,8 @@ $ 0</code></pre>
 						<ul>
 							<li>Smaller bundle thanks to 🌳-shaking</li>
 							<li>Reduce boilerplate into <code>@NgModule</code></li>
-							<li>Simplify testing</li>
+							<li>Avoid to import useless code from lib 😎</li>
+							<li>Simplify unit-testing</li>
 						</ul>
 					</section>
 				</section>
