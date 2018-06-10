@@ -321,12 +321,37 @@ AppComponent.ngComponentDef = defineComponent({
                         <a href="https://is-angular-ivy-ready.firebaseapp.com/#/status">🔍 Look at it</a>
                     </section>
 				</section>
+				<section id="angular_elements">
+					<section data-background="images/angular6/angular-elements/intro.jpg">
+						<angular-elements-event event-name="VoxxedDays Luxembourg"></angular-elements-event>
+					</section>
+					<section>
+						<p>Coming from Angular-Labs</p>
+						<img src="images/angular6/angular-elements/angular-labs.png" alt="angular-labs" style="width: 200px">
+					</section>
+					<section>
+						<p>And still very young 🐣</p>
+					</section>
+					<section>
+						<p>The goal of Angular-Elements</p>
+						<p class="fragment">Provide all the power of Angular to build <br/><code>custom-elements</code></p>
+					</section>
+					<section id="use_them_everywhere">
+						<p>and use them inside every app...</p>
+						<div class="frameworks">
+							<img class="fragment" src="images/angular6/angular-elements/vuejs.png" alt="vuejs">
+							<img class="fragment" src="images/angular6/angular-elements/preact.png" alt="preact">
+							<img class="fragment" src="images/angular6/angular-elements/react.svg" alt="react">
+							<img class="fragment" src="images/angular6/angular-elements/polymer.png" alt="polymer">
+						</div>
+					</section>
+				</section>
 			</div>
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
-
+		<script src="demo/angular-elements-example/elements/aee.js"></script>
 		<script>
 			// More info about config & dependencies:
 			// - https://github.com/hakimel/reveal.js#configuration
@@ -340,6 +365,9 @@ AppComponent.ngComponentDef = defineComponent({
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
+
+            const element = document.querySelector('angular-elements-event');
+            element.addEventListener('action', function(v) { console.log(v); });
 		</script>
 	</body>
 </html>

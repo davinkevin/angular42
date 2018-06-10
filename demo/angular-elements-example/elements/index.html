@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular Element example</title>
+</head>
+<body>
+  <angular-elements-event event-name="Angular Elements in VoxxedDays Luxembourg"></angular-elements-event>
+  <script src="aee.js"></script>
+  <script>
+    const element = document.querySelector('angular-elements-event');
+    element.addEventListener('action', (v) => console.log(v));
+
+    setTimeout(() => element.label = 'VoxxedDays Luxembourg', 1000);
+  </script>
+</body>
+</html>
