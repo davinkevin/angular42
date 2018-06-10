@@ -172,13 +172,58 @@ $ 0</code></pre>
 					</section>
 				</section>
 				<section>
-					<section>
+					<section data-background="/images/angular6/ivy/ivy.jpg">
 						<h3>Ivy Renderer</h3>
+					</section>
+
+					<section data-background="/images/angular6/ivy/transformation.gif">
+						&nbsp;
+					</section>
+
+					<section data-background="/images/angular6/ivy/change.jpg">
+						&nbsp;
+					</section>
+
+					<section>
+						<ul>
+							<li>Angular2 => Original Renderer</li>
+							<li class="fragment">Angular v4 => Renderer2</li>
+							<li class="fragment">Angular 7? => Renderer3 <span class="fragment">alias Ivy 🍃</span></li>
+						</ul>
+					</section>
+
+
+
+					<section>
+						<p>What is the difference for my code ?</p>
+						<pre><code>@Component({
+  selector: 'app-test-comp1',
+  template: `
+    <div>
+      <p>Hello {{ title }}</p>
+    </div>
+  `
+})
+export class TestComp1Component implements OnInit {
+  title: string = 'world';
+  ngOnInit() {
+    this.title = "Luxembourg";
+  }
+}						</code></pre>
+					</section>
+
+					<section>
+						NONE ! 🤩
+					</section>
+
+					<section>
+						But the generated code will change !
 					</section>
 
 					<section>
 						<h3>With Render2</h3>
-						<pre><code>export function View_AppComponent_0() {
+						<pre><code>// app.component.ngfactory.js
+export function View_AppComponent_0() {
   return viewDef(0, [
       elementDef(0, 0, null, null, 2, "div", [], null, null, null, null, null),
       elementDef(1, 0, null, null, 1, "p", [], null, null, null, null, null),
@@ -192,35 +237,89 @@ $ 0</code></pre>
 }</code></pre>
 					</section>
 					<section>
-						<h3>With Ivy</h3>
-						<pre><code>export class AppComponent {
-  constructor() {
-    this.title = 'World';
+						<p>And the sub-layer structure of the <code>createViewNodes</code></p>
+						<pre><code>function createViewNodes(view: ViewData) {
+ view.nodes.forEach(n => {
+  switch (n.flags & NodeFlags.Types) {
+   case NodeFlags.TypeElement: return element(n);
+   case NodeFlags.TypeText: return text(n);
+   case NodeFlags.TypeValueProvider: return valueProvider(n);
+   case NodeFlags.TypePipe: return pipe(n);
+   case NodeFlags.TypeDirective: return directive(n);
+   case NodeFlags.TypePurePipe: return purePipe(n);
+   case NodeFlags.TypeViewQuery: return viewQuery(n);
+   case NodeFlags.TypeNgContent: return ngContent(n);
+   ...
   }
-  updateTitle() {
-    this.title = 'Luxembourg !';
-  }
-}</code></pre>
+ }</code></pre>
 					</section>
+                    <section>
+                        <p>with Renderer2</p>
+                        <ul>
+                            <li><code>app.component.js</code></li>
+                            <li><code>app.component.ngfactory.js</code></li>
+                        </ul>
+                    </section>
+
 					<section>
-						<h3>And the template</h3>
-						<pre><code>AppComponent.ngComponentDef = defineComponent({
-  type: AppComponent,
-  selectors: [["app-root"]],
-  factory: function AppComponent_Factory() { return new AppComponent(); },
-  template: function AppComponent_Template(renderFlag, component) {
-    if (renderFlag & RenderFlags.Create) {
-      elementStart(0, "div");
-      elementStart(1, "p");
-      text(2);
-      elementEnd();
-      elementEnd();
-    } if (renderFlag & RenderFlags.Update) {
-      textBinding(2, interpolation1("Hello ", component.title, ""));
+						<h3>with Ivy 🍃</h3>
+						<pre><code>// app.component.js
+import { Component } from '@angular/core';
+import * as i0 from "@angular/core";
+export class AppComponent {
+    constructor() {
+        this.title = 'World';
     }
-  }
+    updateTitle() {
+        this.title = 'Luxembourg !';
+    }
+}</code></pre>
+                    </section>
+					<section>
+						<h3>with Ivy 🍃</h3>
+                        <pre><code>// app.component.js
+AppComponent.ngComponentDef = defineComponent({
+ type: AppComponent,
+ selectors: [["app-root"]],
+ factory: function AppComponent_Factory() { return new AppComponent(); },
+ template: ...
 });</code></pre>
 					</section>
+                    <section>
+                        <h3>with Ivy 🍃</h3>
+                        <pre><code>function AppComponent_Template(renderFlag, component) {
+  if (renderFlag & RenderFlags.Create) {
+    elementStart(0, "div");
+     elementStart(1, "p");
+      text(2);
+     elementEnd();
+    elementEnd();
+  } if (renderFlag & RenderFlags.Update) {
+    textBinding(2,
+     interpolation1("Hello ", component.title, "")
+    );
+  }
+ }</code></pre>
+                    </section>
+                    <section>
+                        <p>All in one file 💪</p>
+                    </section>
+                    <section>
+                        <p>Integrate only what we need ✂️</p>
+                        <p class="fragment">So, it's smaller</p>
+                    </section>
+                    <section>
+                        <p>Simpler 🤓</p>
+                        <p class="fragment">The generated code is human-readable</p>
+                    </section>
+                    <section>
+                        <p>Debug friendly 👩‍💻</p>
+                        <p class="fragment">🔴 into the html !</p>
+                    </section>
+                    <section>
+                        <p>But still in progress 👨‍🔬</p>
+                        <a href="https://is-angular-ivy-ready.firebaseapp.com/#/status">🔍 Look at it</a>
+                    </section>
 				</section>
 			</div>
 		</div>
