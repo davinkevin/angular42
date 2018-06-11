@@ -308,6 +308,19 @@ AppComponent.ngComponentDef = defineComponent({
                         <p>Integrate only what we need ✂️</p>
                         <p class="fragment">So, it's smaller</p>
                     </section>
+					<section data-background="/images/angular6/ivy/small.jpg">
+						&nbsp;
+					</section>
+					<section>
+						<p>Size comparison</p>
+						<pre><code>$ du -sh *
+172K	ivy-renderer-ivy
+272K	ivy-renderer-renderer2</code></pre>
+						<pre class="fragment"><code>$ du -sh *
+189K	main.renderer2.js
+92K	main.ivy.js</code></pre>
+						<span class="fragment">😍</span>
+					</section>
                     <section>
                         <p>Simpler 🤓</p>
                         <p class="fragment">The generated code is human-readable</p>
