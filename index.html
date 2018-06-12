@@ -358,6 +358,97 @@ AppComponent.ngComponentDef = defineComponent({
 							<img class="fragment" src="images/angular6/angular-elements/polymer.png" alt="polymer">
 						</div>
 					</section>
+					<section data-background-image="images/angular6/angular-elements/boring.gif">
+						<span class="fragment">How can we do that ?</span>
+					</section>
+					<section>
+						<p>Like you already do 👍</p>
+						<p class="fragment">...with some differences 😮</p>
+					</section>
+					<section>
+						<p>Component</p>
+						<pre><code data-noescape >@Component({
+  selector: 'angular-elements-event',
+  templateUrl: './angular-elements-event.html',
+  <span class="fragment">encapsulation: ViewEncapsulation.Native // 👁</span>
+})
+export class AngularElementsEvent {
+  year = 2018;
+  @Input() eventName : string = 'No label...';
+  @Output() action = new EventEmitter&ltstring&gt();
+
+  emit() {
+    this.action.emit(this.eventName + ' ' + this.year);
+    this.year += 1;
+  }
+}					</code></pre>
+					</section>
+					<section>
+						<code>ViewEncapsulation.Native</code>
+						<p class="fragment">Because it's part of the W3C spec !</p>
+					</section>
+					<section>
+						<p>And the module</p>
+						<pre><code>@NgModule({
+  declarations: [AngularElementsEvent],
+  entryComponents: [AngularElementsEvent],
+  imports: [BrowserModule],
+})
+export class AppModule {
+ constructor(private injector: Injector) { }
+
+ ngDoBootstrap() {
+  const element = createCustomElement(AngularElementsEvent,
+   { injector: this.injector }
+  );
+  customElements.define('angular-elements-event', element);
+  }
+}					</code></pre>
+					</section>
+					<section data-background-video="images/angular6/angular-elements/drop-the-mic.mp4">
+						&nbsp;
+					</section>
+					<section>
+						<p>And you can use it like a real Web-Components</p>
+						<pre><code>
+ &ltangular-elements-event event-name="VoxxedDays Luxembourg"&gt
+ &lt/angular-elements-event&gt
+
+ &ltscript&gt
+  const element = document.querySelector('angular-elements-event');
+  element.addEventListener('action', function(v) {
+   console.log(v);
+  });
+ &lt/script&gt			</code></pre>
+					</section>
+					<section data-background-image="images/angular6/angular-elements/remember.gif">
+						&nbsp;
+					</section>
+					<section data-background="images/angular6/angular-elements/intro.jpg">
+						<angular-elements-event event-name="VoxxedDays Luxembourg"></angular-elements-event>
+					</section>
+					<section data-background="images/angular6/angular-elements/problem.gif">
+						&nbsp;
+					</section>
+					<section>
+						Yes 😰
+					</section>
+					<section>
+						<p>There is no tooling for this right now 🛠</p>
+					</section>
+					<section>
+						<p>So we create our own...</p>
+						<pre><code>
+"build:element": "ng build --prod --output-hashing none \
+                  && node build-element.js",
+					</code></pre>
+					</section>
+					<section>
+						<p>We just do </p>
+						<pre><code>
+$ cat dist/{runtime,polyfills,scripts,main}.js | gz > ae.js
+						</code></pre>
+					</section>
 				</section>
 			</div>
 		</div>
@@ -379,8 +470,8 @@ AppComponent.ngComponentDef = defineComponent({
 				]
 			});
 
-            const element = document.querySelector('angular-elements-event');
-            element.addEventListener('action', function(v) { console.log(v); });
+            const elements = document.querySelectorAll('angular-elements-event');
+            elements.forEach(e => e.addEventListener('action', function(v) { console.log(v); }));
 		</script>
 	</body>
 </html>
