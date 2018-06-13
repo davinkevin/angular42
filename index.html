@@ -433,22 +433,26 @@ export class AppModule {
 					<section>
 						Yes 😰
 					</section>
+                    <section>
+                        <p>Size of the 🎁</p>
+                        <pre><code data-noescape>$ ls | grep aee | xargs du -sh
+220K	aee.js <span class="fragment">😱</span>
+72K	aee.js.gz           </code></pre>
+                    </section>
 					<section>
 						<p>There is no tooling for this right now 🛠</p>
 					</section>
 					<section>
 						<p> 😓 So we create our own...</p>
 						<pre><code>
-"build:element": "ng build --prod --output-hashing none \
-                  && node build-element.js",
+"build": "ng build --prod --output-hashing none",
+"postbuild": "cat dist/{runtime,polyfills,scripts,main}.js | gz > ae.js",
 						</code></pre>
 					</section>
-					<section>
-						<p>We just do </p>
-						<pre><code>
-$ cat dist/{runtime,polyfills,scripts,main}.js | gz > ae.js
-						</code></pre>
-					</section>
+                    <section>
+                        <p>Or we can use some <code>ng</code> extensions</p>
+                        <p class="fragment"><a href="https://www.npmjs.com/package/ngx-build-plus">ngx-build-plus</a> with webpack extra</p>
+                    </section>
 				</section>
 			</div>
 		</div>
