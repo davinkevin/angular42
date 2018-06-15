@@ -463,8 +463,148 @@ export class AppModule {
 				</section>
 
 				<section>
+					<section data-background-color="white">
+						<img src="images/rxjs/logo.png" alt="rxjs">
+					</section>
 					<section>
-						<h3>RxJS</h3>
+						<p>Welcome to version 6 of RxJS</p>
+					</section>
+					<section>
+						<p>Ben Lesh joins the Angular Team ! 👼</p>
+					</section>
+					<section>
+						<div class="tweet" data-src="https://twitter.com/IgorMinar/status/976578383948562432"></div>
+					</section>
+					<section>
+						<p>RxJS evolves a lot (v5.4)</p>
+						<pre><code>
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
+
+Observable.of(1, 2, 3)
+ .filter(v => v % 2)
+ .map(v => v ** 2)
+ .subscribe(r => console.log(r)); // 4
+						</code></pre>
+					</section>
+					<section>
+						<p>RxJS evolves a lot (v5.5)</p>
+						<pre><code>
+import { of } from 'rxjs/bservable/of';
+import { filter } from 'rxjs/operators/filter';
+import { map } from 'rxjs/operators/map';
+
+Observable.of(1, 2, 3).pipe(
+ filter(v => v % 2),
+ map(v => v ** 2)
+).subscribe(r => console.log(r)); // 4
+						</code></pre>
+					</section>
+					<section>
+						<p>RxJS v6 !</p>
+						<pre><code>
+import { of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+
+Observable.of(1, 2, 3).pipe(
+ filter(v => v % 2),
+ map(v => v ** 2)
+).subscribe(r => console.log(r)); // 4
+						</code></pre>
+					</section>
+					<section>
+						<p>You only have 5 type of import !</p>
+						<ul>
+							<li><code>from 'rxjs'</code></li>
+							<li><code>from 'rxjs/operators'</code></li>
+							<li><code>from 'rxjs/testing'</code></li>
+							<li><code>from 'rxjs/webSocket'</code></li>
+							<li><code>from 'rxjs/ajax'</code></li>
+						</ul>
+					</section>
+					<section>
+						<p>Huge simplification in v6</p>
+					</section>
+					<section>
+						<p>In the previous version</p>
+						<pre><code>
+ Observable.of(1);
+ .of(1);
+ fromArray([1]);
+ new ScalarObservable(1)
+ ScalarObservable.create(1)
+ new ArrayObservable(1);
+ ArrayObservable.create(1);
+						</code></pre>
+						<span class="fragment">😱</span>
+					</section>
+					<section>
+						<p>Right now, in v6</p>
+						<pre><code data-noescape><span class="fragment">import { of } from 'rxjs</span>
+
+of(1)
+						</code></pre>
+					</section>
+					<section>
+						<p>Did you know the <code>resultSelector</code> ?</p>
+						<pre><code>
+switchMap(
+ project: function: Observable,
+ resultSelector: function(outerValue, innerValue, outerIndex, innerIndex): any
+): Observable
+						</code></pre>
+					</section>
+					<section>
+						<pre><code data-noescape>
+of(1, 2, 3).pipe(
+ switchMap(() =>  of(4, 5, 6)<span class="fragment">, (oV, iV, oI, iI) => oV + iV</span>)
+).subscribe(v => console.log(v)); <span>// TODO</span>
+						</code></pre>
+					</section>
+					<section>
+						<pre><code data-noescape>
+of(1, 2, 3).pipe(
+ switchMap(a =>  of(4, 5, 6)<span class="fragment">.pipe(map(w => v * w))</span> )
+).subscribe(v => console.log(v)); <span>// TODO</span>
+						</code></pre>
+					</section>
+					<section data-background-image="images/rxjs/pipe.gif">
+						Major improvements
+					</section>
+					<section>
+						<p>You should use <code>pipeable</code> operator...</p>
+					</section>
+					<section>
+						<p>You <b>have to</b> use <code>pipeable</code> operator...</p>
+					</section>
+					<section>
+						Again, 🌳 shaking FTW
+					</section>
+					<section>
+						And for simplicity !
+					</section>
+					<section>
+						<p>I can do my own operator</p>
+						<pre><code data-noescape>// custom-operator.ts
+import { filter } from 'rxjs/operators';
+export const filterIsNotNull = () => filter(x != null);
+
+<span class="fragment">// my-file.ts
+import { filterIsNotNull } from './custom-operator';
+of(1, null, 2, null, 3).pipe(
+ filterIsNotNull()
+).subscribe(x => console.log(x)) // 1, 2, 3
+</span></code></pre>
+						<p class="fragment">With the old version, a lots of line was required.</p>
+					</section>
+					<section>
+						<ul>
+							<li>It's simpler to code</li>
+							<li>It allows a minimal size bundle</li>
+							<li>It future-proof 😎</li>
+						</ul>
 					</section>
 				</section>
 
@@ -488,6 +628,7 @@ export class AppModule {
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/embedded-tweet/embedded-tweet.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
