@@ -571,6 +571,18 @@ of(1, 2).pipe(
 ).subscribe(v => console.log(v)); <span><span class="fragment">// 4, 5, 8, 10</span></span>
 						</code></pre>
 					</section>
+					<section>
+						<p>How about backward compatibility ?</p>
+						<pre class="fragment"><code>// package.json
+"dependencies": {
+ "rxjs-compat": "^6.0.0"
+}						</code></pre>
+					</section>
+					<section>
+						<p>Or migrate your code base !</p>
+						<pre><code>yarn add rxjs-tslint
+yarn rxjs-5-to-6-migrate -p src/tsconfig.app.json</code></pre>
+					</section>
 					<section data-background-image="images/rxjs/pipe.gif">
 						<h2><code>.pipe()</code></h2>
 						<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
