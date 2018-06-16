@@ -468,6 +468,7 @@ export class AppModule {
 						<p>Welcome to version 6 of RxJS</p>
 					</section>
 					<section>
+						<img src="images/rxjs/benlesh.jpg" alt="ben lesh">
 						<p>Ben Lesh joins the Angular Team ! 👼</p>
 					</section>
 					<section>
@@ -526,7 +527,7 @@ of(1, 2, 3).pipe(
 						<p>Huge simplification in v6</p>
 					</section>
 					<section>
-						<p>In the previous version</p>
+						<p>In the previous versions</p>
 						<pre><code>
  Observable.of(1);
  of(1);
@@ -540,7 +541,7 @@ of(1, 2, 3).pipe(
 					</section>
 					<section>
 						<p>Right now, in v6</p>
-						<pre><code data-noescape><span class="fragment">import { of } from 'rxjs</span>
+						<pre><code data-noescape><span class="fragment">import { of } from 'rxjs'</span>
 
 of(1)
 						</code></pre>
@@ -555,10 +556,10 @@ switchMap(
 						</code></pre>
 					</section>
 					<section>
-						<p>resultSelector</p>
+						<p>With resultSelector</p>
 						<pre><code data-noescape>
 of(1, 2).pipe(
- switchMap(() =>  of(4, 5)<span class="fragment">, (oV, iV, oI, iI) => oV + iV</span>)
+ switchMap(() =>  of(4, 5)<span class="fragment">, (oV, iV, oI, iI) => oV * iV</span>)
 ).subscribe(v => console.log(v)); <span><span class="fragment">// 4, 5, 8, 10</span></span>
 						</code></pre>
 					</section>
@@ -581,7 +582,7 @@ of(1, 2).pipe(
 						<p>You <b>have to</b> use <code>pipeable</code> operator...</p>
 					</section>
 					<section>
-						Again, 🌳 shaking FTW
+						Again, 🌳 shaking FTW !
 					</section>
 					<section>
 						And for simplicity !
