@@ -622,9 +622,169 @@ of(1, null, 2, null, 3).pipe(
 					</section>
 				</section>
 
-				<section>
-					<section>
+				<section id="cli">
+					<section data-background-color="#f44336">
 						<h3>Angular CLI</h3>
+						<img src="images/cli/logo-cli.png" alt="cli" width="300px">
+					</section>
+					<section>
+						<p>What's new ?</p>
+					</section>
+					<section data-background-image="images/cli/6.webp">
+						&nbsp;
+					</section>
+					<section>
+						<p>The <code>CLI</code> moves to Webpack 4</p>
+					</section>
+					<section data-background-image="images/cli/fast.gif">
+						&nbsp;
+					</section>
+					<section>
+						<code>ng eject</code>
+						<p>😓</p>
+					</section>
+					<section>
+						<p>But some lib now allows to extend webpack config</p>
+						<p>without ejecting !</p>
+						<span class="fragment"><a href="https://github.com/manfredsteyer/ngx-build-plus">ngx-build-plus</a></span>
+					</section>
+					<section>
+						<p>Library supports !</p>
+						<p class="fragment">And multi projects</p>
+					</section>
+					<section data-background-image="images/cli/finally.gif">
+						&nbsp;
+					</section>
+					<section>
+						<span>How to</span>
+						<pre><code>
+$ ng new project-name
+$ cd project-name
+$ ng generate library @davinkevin/ngx-stomp --prefix dk
+						</code></pre>
+					</section>
+					<section>
+						<span>Based upon</span>
+						<p><a href="https://github.com/dherges/ng-packagr">ng-packagr</a></p>
+					</section>
+					<section>
+						<p>New project structure</p>
+						<pre><code>root
+ projects
+  my-lib
+   src
+    lib
+     my-lib.module.ts
+    public_api.ts
+ src
+  app
+   app.module.ts		</code></pre>
+					</section>
+					<section data-background-image="images/cli/changes.gif">
+						&nbsp;
+					</section>
+					<section>
+						<p><code>.angular-cli.json</code></p>
+						<p class="fragment" data-fragment-index="2">↓</p>
+						<p class="fragment" data-fragment-index="2"><code>angular.json</code></p>
+					</section>
+					<section>
+						<p>With a very global structure</p>
+						<pre><code>{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "cli-v6-with-lib": {},
+    "cli-v6-with-lib-e2e": {},
+    "my-lib": {}
+  },
+  "defaultProject": "cli-v6-with-lib"
+}						</code></pre>
+					</section>
+					<section>
+						<p>At project level</p>
+						<pre><code>{
+ "cli-v6-with-lib": {
+   "root": "",
+   "sourceRoot": "src",
+   "projectType": "application",
+   "prefix": "app",
+   "schematics": {},
+   "architect": {
+ 	"build": {},
+ 	"serve": {},
+ 	"extract-i18n": {},
+ 	"test": {},
+ 	"lint": {}
+   }
+ }
+}						</code></pre>
+					</section>
+					<section>
+						<p>Each task is described like this</p>
+						<pre><code>{
+"build": {
+  "builder": "@angular-devkit/build-angular:browser",
+  "options": {
+   "outputPath": "dist/cli-v6-with-lib",
+   "index": "src/index.html",
+   "main": "src/main.ts",
+   "polyfills": "src/polyfills.ts",
+   "tsConfig": "src/tsconfig.app.json",
+   "assets": [
+     "src/favicon.ico",
+     "src/assets"
+   ],
+   "styles": [
+     "src/styles.css"
+   ],
+   "scripts": []
+  },
+  "configurations": {
+   "production": {
+     "fileReplacements": [
+   	{
+   	  "replace": "src/environments/environment.ts",
+   	  "with": "src/environments/environment.prod.ts"
+   	}
+     ],
+     "optimization": true,
+     "outputHashing": "all",
+     "sourceMap": false,
+     "extractCss": true,
+     "namedChunks": false,
+     "aot": true,
+     "extractLicenses": true,
+     "vendorChunk": false,
+     "buildOptimizer": true
+   }
+  }
+ }
+}		   				</code></pre>
+					</section>
+					<section>
+						<p><code>--env XYZ</code></p>
+						<p class="fragment" data-fragment-index="2">↓</p>
+						<p class="fragment" data-fragment-index="2"><code>--configuration XYZ</code></p>
+					</section>
+					<section>
+						<p><code>ng test --single-run</code></p>
+						<p class="fragment" data-fragment-index="2">↓</p>
+						<p class="fragment" data-fragment-index="2"><code>ng test --watch=false</code></p>
+					</section>
+					<section>
+						<span>How do I run command on a specific context ?</span>
+						<pre><code class="fragment">
+$ ng run project:task[:configuration] [...options]
+						</code></pre>
+						<pre><code class="fragment">
+$ ng run podcast-server:build:custom-conf --aot
+						</code></pre>
+					</section>
+					<section id="new_commands">
+						<p>New commands</p>
+						<span class="commands"><code class="fragment">ng add</code><code class="fragment">ng update</code></span>
 					</section>
 				</section>
 			</div>
