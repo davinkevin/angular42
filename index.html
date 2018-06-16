@@ -484,7 +484,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 
 Observable.of(1, 2, 3)
- .filter(v => v % 2)
+ .filter(v => v % 2 == 0)
  .map(v => v ** 2)
  .subscribe(r => console.log(r)); // 4
 						</code></pre>
@@ -496,8 +496,8 @@ import { of } from 'rxjs/bservable/of';
 import { filter } from 'rxjs/operators/filter';
 import { map } from 'rxjs/operators/map';
 
-Observable.of(1, 2, 3).pipe(
- filter(v => v % 2),
+of(1, 2, 3).pipe(
+ filter(v => v % 2 == 0),
  map(v => v ** 2)
 ).subscribe(r => console.log(r)); // 4
 						</code></pre>
@@ -508,8 +508,8 @@ Observable.of(1, 2, 3).pipe(
 import { of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-Observable.of(1, 2, 3).pipe(
- filter(v => v % 2),
+of(1, 2, 3).pipe(
+ filter(v => v % 2 == 0),
  map(v => v ** 2)
 ).subscribe(r => console.log(r)); // 4
 						</code></pre>
@@ -531,7 +531,7 @@ Observable.of(1, 2, 3).pipe(
 						<p>In the previous version</p>
 						<pre><code>
  Observable.of(1);
- .of(1);
+ of(1);
  fromArray([1]);
  new ScalarObservable(1)
  ScalarObservable.create(1)
@@ -557,21 +557,24 @@ switchMap(
 						</code></pre>
 					</section>
 					<section>
+						<p>resultSelector</p>
 						<pre><code data-noescape>
-of(1, 2, 3).pipe(
- switchMap(() =>  of(4, 5, 6)<span class="fragment">, (oV, iV, oI, iI) => oV + iV</span>)
-).subscribe(v => console.log(v)); <span>// TODO</span>
+of(1, 2).pipe(
+ switchMap(() =>  of(4, 5)<span class="fragment">, (oV, iV, oI, iI) => oV + iV</span>)
+).subscribe(v => console.log(v)); <span><span class="fragment">// 4, 5, 8, 10</span></span>
 						</code></pre>
 					</section>
 					<section>
+						<p>In RxJS 6</p>
 						<pre><code data-noescape>
-of(1, 2, 3).pipe(
- switchMap(a =>  of(4, 5, 6)<span class="fragment">.pipe(map(w => v * w))</span> )
-).subscribe(v => console.log(v)); <span>// TODO</span>
+of(1, 2).pipe(
+ switchMap(o =>  of(4, 5)<span class="fragment">.pipe(map(i => o * i))</span> )
+).subscribe(v => console.log(v)); <span><span class="fragment">// 4, 5, 8, 10</span></span>
 						</code></pre>
 					</section>
 					<section data-background-image="images/rxjs/pipe.gif">
-						Major improvements
+						<h2><code>.pipe()</code></h2>
+						<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 					</section>
 					<section>
 						<p>You should use <code>pipeable</code> operator...</p>
@@ -589,7 +592,7 @@ of(1, 2, 3).pipe(
 						<p>I can do my own operator</p>
 						<pre><code data-noescape>// custom-operator.ts
 import { filter } from 'rxjs/operators';
-export const filterIsNotNull = () => filter(x != null);
+export const filterIsNotNull = () => filter(x => x != null);
 
 <span class="fragment">// my-file.ts
 import { filterIsNotNull } from './custom-operator';
