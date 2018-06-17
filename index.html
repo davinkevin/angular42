@@ -782,9 +782,69 @@ $ ng run project:task[:configuration] [...options]
 $ ng run podcast-server:build:custom-conf --aot
 						</code></pre>
 					</section>
+				</section>
+				<section id="schematics">
+					<section data-background-image="images/schematics/schematics.gif">
+						Schematics everywhere !
+					</section>
+					<section>
+						<p>
+							<span class="fragment">build,</span>
+							<span class="fragment">serve, </span>
+							<span class="fragment">extract-i18n,</span>
+							<span class="fragment">test, </span>
+							<span class="fragment">lint</span>
+						</p>
+						<p class="fragment">And yours !</p>
+					</section>
 					<section id="new_commands">
-						<p>New commands</p>
+						<p>Thanks to new commands</p>
 						<span class="commands"><code class="fragment">ng add</code><code class="fragment">ng update</code></span>
+					</section>
+					<section>
+						<p>Right now, we already can</p>
+						<ul>
+							<li>Install Angular Material</li>
+							<li>Install ngrx, create reducer, effects, actions...</li>
+							<li>Install dependencies for Angular-Elements</li>
+							<li>Install the service-worker config</li>
+						</ul>
+					</section>
+					<section>
+						<p>And we build our own</p>
+						<ul>
+							<li>Install Prettier</li>
+							<li>Install Compodoc</li>
+							<li>Install Jest</li>
+							<li>Install our Gitlab CI Configuration</li>
+						</ul>
+					</section>
+					<section>
+						<p>For example, with Jest</p>
+						<pre><code>
+$ ng add @davinkevin/jest
+						</code></pre>
+						<p class="fragment"> And that's all folks !</p>
+					</section>
+					<section>
+						<p>Behind the curtain</p>
+						<pre><code>export function ngAdd(_: any): Rule {
+ return chain([
+  addScriptsToPackageJson("test", "jest --runInBand --ci --silent",),
+  addScriptsToPackageJson("test:watch", "jest --watch",),
+  addPackageToPackageJson("devDependencies", "@types/jest", "^22.2.0"),
+  addPackageToPackageJson("devDependencies", "jest", "^22.4.2"),
+  addPackageToPackageJson("devDependencies", "jest-preset-angular", "^5.2.1"),
+  runNpmPackageInstall(),
+  editTsConfigSpecJson(),
+  deleteFiles(),
+  copyConfigFiles()
+ ]);
+}						</code></pre>
+					</section>
+					<section>
+						<p>No more <code>npm install</code></p>
+						<p>No more dirty project edition</p>
 					</section>
 				</section>
 			</div>
