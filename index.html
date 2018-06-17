@@ -847,6 +847,70 @@ $ ng run podcast-server:build:custom-conf --aot
 						<p>No more dirty project edition</p>
 					</section>
 				</section>
+				<section>
+					<section data-background-color="white">
+						<img src="images/ninjasquad/logo.png" alt="ninja squad">
+					</section>
+                    <section>
+                        <img src="images/ninjasquad/speculoos.svg" alt="speculoos" width="300px">
+                        <h5>ngx‑speculoos by Ninja Squad</h5>
+                        <p>Simpler, cleaner Angular unit tests.</p>
+                    </section>
+					<section>
+						<p>Make this kind of test simpler !</p>
+						<pre><code class="hljs typescript">it('should display French cities when selecting the country France', () => {
+  const countrySelect = fixture.nativeElement.querySelector('#country');
+  countrySelect.selectedIndex = 12;
+  countrySelect.dispatchEvent(new Event('change'));
+  fixture.detectChanges();
+
+  const city = fixture.nativeElement.querySelector('#city');
+  expect(city).toBeTruthy();
+  expect(city.options.length).toBe(2);
+  expect(city.options[1].value).toBe('PARIS');
+  expect(city.options[1].label).toBe('Paris');
+  expect(city.options[2].value).toBe('LYON');
+  expect(city.options[2].label).toBe('Lyon');
+});</code></pre>
+					</section>
+					<section>
+						<p>Create a PageObject element</p>
+						<pre><code>class MyComponentTester extends ComponentTester&ltMyComponent&gt {
+  constructor() { super(MyComponent); }
+
+  get country() {
+    return this.select('#country');
+  }
+
+  get city() {
+    return this.select('#city');
+  }
+}						</code></pre>
+					</section>
+					<section>
+						<p>Use it !</p>
+						<pre><code>it('should display French cities when selecting the country France', () => {
+  tester.country.selectLabel('France');
+
+  expect(tester.city.optionValues).toEqual(['PARIS', 'LYON']);
+  expect(tester.city.optionLabels).toEqual(['Paris', 'Lyon']);
+});
+
+it('should hide cities when selecting empty country option', () => {
+  tester.country.selectIndex(0);
+
+  expect(tester.city).toBeFalsy();
+});						</code></pre>
+					</section>
+					<section>
+						<div>
+							<h1 style="display: inline-block">D</h1><span style="font-size: small">on't</span>
+							<h1 style="display: inline-block">R</h1><span style="font-size: small">epeat</span>
+							<h1 style="display: inline-block">Y</h1><span style="font-size: small">ourself</span>
+							<h1 style="display: inline-block">!</h1>
+						</div>
+					</section>
+				</section>
 			</div>
 		</div>
 
