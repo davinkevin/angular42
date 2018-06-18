@@ -903,6 +903,18 @@ it('should hide cities when selecting empty country option', () => {
 });						</code></pre>
 					</section>
 					<section>
+						<p>With custom matchers !</p>
+						<pre><code>beforeEach(() => jasmine.addMatchers(speculoosMatchers));
+
+it('should contain a pre-populated form', () => {
+ expect(tester.informationMessage).toContainText('Please check that everything is correct');
+ expect(tester.country).toHaveSelectedValue('FR');
+ expect(tester.city).toHaveSelectedLabel('Paris');
+ expect(tester.name).toHaveValue('Doe');
+ expect(tester.newsletter).toBeChecked();
+});						</code></pre>
+					</section>
+					<section>
 						<div>
 							<h1 style="display: inline-block">D</h1><span style="font-size: small">on't</span>
 							<h1 style="display: inline-block">R</h1><span style="font-size: small">epeat</span>
