@@ -847,7 +847,7 @@ $ ng run podcast-server:build:custom-conf --aot
 						<p>No more dirty project edition</p>
 					</section>
 				</section>
-				<section>
+				<section id="ninja_squads">
 					<section data-background-color="white">
 						<img src="images/ninjasquad/logo.png" alt="ninja squad">
 					</section>
@@ -922,7 +922,62 @@ it('should contain a pre-populated form', () => {
 							<h1 style="display: inline-block">!</h1>
 						</div>
 					</section>
+					<section>
+						<img src="images/ninjasquad/valdermort.svg" alt="valdemort" width="200px">
+						<p>ngx-valdemort gives you simpler, cleaner validation error messages for your Angular components.</p>
+					</section>
+					<section>
+						<p>Don't write this kind of code any more...</p>
+						<pre><code><form [formGroup]="f" (ngSubmit)="submit()" #f="ngForm">
+ <input formControlName="email" type="email"/>
+ <div class="invalid-feedback"
+	  *ngIf="f.get('email').invalid && (f.submitted || f.get('email').touched)">
+  <div *ngIf="f.get('email').hasError('required')">The email is required</div>
+  <div *ngIf="f.get('email').hasError('email')">The email must be a valid email address</div>
+ </div>
+
+ <button (click)="submit()">Submit</button>
+</form>					</code></pre>
+					</section>
+					<section>
+						<p>But write this</p>
+						<pre><code><form [formGroup]="form" (ngSubmit)="submit()">
+  <input formControlName="email" type="email"/>
+  <val-errors controlName="email">
+    <ng-template valError="required">The email is required</ng-template>
+    <ng-template valError="email">The email must be a valid email address</ng-template>
+  </val-errors>
+
+  <button>Submit</button>
+</form>					</code></pre>
+					</section>
+					<section>
+						<p>Share and Override</p>
+						<pre><code><val-default-errors>
+ <ng-template valError="required" let-label>{{ label || 'This field' }} is required</ng-template>
+ <ng-template valError="email" let-label>{{ label || 'This field' }} must be a valid email address</ng-template>
+ <ng-template valError="min" let-error="error" let-label>{{ label || 'This field' }} must be at least {{ error.min | number }}</ng-template>
+</val-default-errors></code></pre>
+					</section>
+					<section>
+						<p>And use it !</p>
+						<pre><code><div class="form-group">
+ <label>Age</label>
+ <input formControlName="age" class="form-control" type="number"/>
+ <val-errors controlName="age">
+  <ng-template valError="min" let-error="error">You must be at least {{ error.min }} years old</ng-template>
+ </val-errors>
+</div>				</code></pre>
+					</section>
+					<section id="compatibility">
+						<p>Compatibility 👏</p>
+						<div class="compatibility">
+							<img src="images/ninjasquad/material.png" alt="material" width="145">
+							<img src="images/ninjasquad/bootstrap.png" alt="bootstrap">
+						</div>
+					</section>
 				</section>
+
 			</div>
 		</div>
 
