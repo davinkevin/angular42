@@ -789,7 +789,7 @@ $ ng run podcast-server:build:custom-conf --aot
 					</section>
 					<section>
 						<p>
-							<span class="fragment">build,</span>
+							<span>build,</span>
 							<span class="fragment">serve, </span>
 							<span class="fragment">extract-i18n,</span>
 							<span class="fragment">test, </span>
@@ -802,21 +802,37 @@ $ ng run podcast-server:build:custom-conf --aot
 						<span class="commands"><code class="fragment">ng add</code><code class="fragment">ng update</code></span>
 					</section>
 					<section>
-						<p>Right now, we already can</p>
-						<ul>
-							<li>Install Angular Material</li>
-							<li>Install ngrx, create reducer, effects, actions...</li>
-							<li>Install dependencies for Angular-Elements</li>
-							<li>Install the service-worker config</li>
-						</ul>
+						<p>Install Angular Material</p>
+						<pre><code>
+$ ng add @angular/material
+						</code></pre>
+					</section>
+					<section>
+						<p>Install ngrx, create reducer, effects, actions...</p>
+						<pre><code>$ ng generate @ngrx/schematics:effect App --root --module app.module.ts</code></pre>
+						<pre><code>$ ng generate feature User -m app.module.ts</code></pre>
+					</section>
+					<section>
+						<p>Install dependencies for Angular-Elements</p>
+						<pre><code>$ ng add @angular/elements</code></pre>
+					</section>
+					<section>
+						<p>Install Service worker and other PWA setup</p>
+						<pre><code>$ ng add @angular/pwa</code></pre>
+					</section>
+					<section>
+						<p>Update the project to new Angular|CLI version</p>
+						<pre><code>$ ng update @angular/cli</code></pre>
+						<pre><code>$ ng update @angular/core</code></pre>
+						<p class="fragment"><a href="https://update.angular.io/">https://update.angular.io/</a></p>
 					</section>
 					<section>
 						<p>And we build our own</p>
 						<ul>
-							<li>Install Prettier</li>
-							<li>Install Compodoc</li>
-							<li>Install Jest</li>
-							<li>Install our Gitlab CI Configuration</li>
+							<li>Install Prettier 🤖</li>
+							<li>Install Compodoc 📖</li>
+							<li>Install Jest 🤡</li>
+							<li>Install our Gitlab CI config 🦊</li>
 						</ul>
 					</section>
 					<section>
@@ -824,7 +840,6 @@ $ ng run podcast-server:build:custom-conf --aot
 						<pre><code>$ ng add @davinkevin/jest</code></pre>
 						<pre class="fragment"><code>$ yarn test</code></pre>
 						<pre class="fragment"><code>$ ng test // Soon </code></pre>
-
 					</section>
 					<section>
 						<p>Behind the curtain</p>
