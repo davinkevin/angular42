@@ -943,10 +943,10 @@ it('should contain a pre-populated form', () => {
 					</section>
 					<section>
 						<div>
-							<h1 style="display: inline-block">D</h1><span style="font-size: small">on't</span>
-							<h1 style="display: inline-block">R</h1><span style="font-size: small">epeat</span>
-							<h1 style="display: inline-block">Y</h1><span style="font-size: small">ourself</span>
-							<h1 style="display: inline-block">!</h1>
+							<h1 class="fragment" data-fragment-index="1" style="display: inline-block">D</h1><span class="fragment" data-fragment-index="1" style="font-size: small">on't</span>
+							<h1 class="fragment" data-fragment-index="2" style="display: inline-block">R</h1><span class="fragment" data-fragment-index="2" style="font-size: small">epeat</span>
+							<h1 class="fragment" data-fragment-index="3" style="display: inline-block">Y</h1><span class="fragment" data-fragment-index="3" style="font-size: small">ourself</span>
+							<h1 class="fragment" data-fragment-index="3" style="display: inline-block">!</h1>
 						</div>
 					</section>
 					<section>
@@ -969,7 +969,7 @@ it('should contain a pre-populated form', () => {
 					<section>
 						<p>But write this</p>
 						<pre><code><form [formGroup]="form" (ngSubmit)="submit()">
-  <input formControlName="email" type="email"/>
+  <input formControlName="email" type="email" required/>
   <val-errors controlName="email">
     <ng-template valError="required">The email is required</ng-template>
     <ng-template valError="email">The email must be a valid email address</ng-template>
@@ -990,7 +990,7 @@ it('should contain a pre-populated form', () => {
 						<p>And use it !</p>
 						<pre><code><div class="form-group">
  <label>Age</label>
- <input formControlName="age" class="form-control" type="number"/>
+ <input formControlName="age" class="form-control" type="number" required/>
  <val-errors controlName="age">
   <ng-template valError="min" let-error="error">You must be at least {{ error.min }} years old</ng-template>
  </val-errors>
