@@ -36,7 +36,7 @@ describe('AppComponent', () => {
   }));
 
   it('should render title in a h1 tag', async(() => {
-    expect(tester.title).toContainText('Welcome to app!');
+    expect(tester.title.textContent.trim()).toEqual('Welcome to app!');
   }));
 
 });

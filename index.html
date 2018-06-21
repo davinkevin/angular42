@@ -893,14 +893,28 @@ $ ng add @angular/material
 						<pre><code>class MyComponentTester extends ComponentTester&ltMyComponent&gt {
   constructor() { super(MyComponent); }
 
-  get country() {
-    return this.element('#country');
+  get informationMessage() {
+    return this.element('#information-message');
   }
 
   get city() {
     return this.select('#city');
   }
 }						</code></pre>
+					</section>
+					<section>
+						<p>Instantiate it !</p>
+						<pre><code>let tester: AppComponentTester;
+
+beforeEach(async(() => {
+ TestBed.configureTestingModule({
+   declarations: [AppComponent],
+ }).compileComponents();
+}));
+
+beforeEach(async(() => {
+ tester = new AppComponentTester();
+}));					</code></pre>
 					</section>
 					<section>
 						<p>Use it !</p>
@@ -911,10 +925,9 @@ $ ng add @angular/material
   expect(tester.city.optionLabels).toEqual(['Paris', 'Lyon']);
 });
 
-it('should hide cities when selecting empty country option', () => {
-  tester.country.selectIndex(0);
-
-  expect(tester.city).toBeFalsy();
+it('should have information message', () => {
+  const message = tester.information.textContent.trim();
+  expect(message).toEqual('Please check that everything is correct');
 });						</code></pre>
 					</section>
 					<section>
@@ -923,7 +936,6 @@ it('should hide cities when selecting empty country option', () => {
 
 it('should contain a pre-populated form', () => {
  expect(tester.informationMessage).toContainText('Please check that everything is correct');
- expect(tester.country).toHaveSelectedValue('FR');
  expect(tester.city).toHaveSelectedLabel('Paris');
  expect(tester.name).toHaveValue('Doe');
  expect(tester.newsletter).toBeChecked();
